@@ -1,0 +1,22 @@
+.section-viajes{
+    .contenedor-cards{
+        display: flex;
+        flex-direction: row;
+        margin-top: 10vh;
+        margin-left: 10vh;
+        margin-bottom: 5vh;
+        
+        .contenedor-responsive{
+            gap: 55%;
+            .card1{
+                background-color: transparent;
+            }
+            .card2{
+                height: 600px;
+                width: 400px;
+                padding: 2% 5%;
+                border: 1px solid blue;
+            }
+        }
+    }
+}
