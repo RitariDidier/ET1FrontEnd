@@ -1,6 +1,6 @@
 function request (config) {
     // eslint-disable-next-line dot-notation
-    config.headers['Authorization'] = localStorage.getItem('accessToken') || ''
+    config.headers['Authorization'] = localStorage.getItem('token') || ''
     return config
   }
 

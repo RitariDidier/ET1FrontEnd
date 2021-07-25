@@ -45,11 +45,13 @@ const routes = [
         {
           path: '/viajes',
           name: 'viajes',
+          meta: { requiresAuth: true },
           component: () => import('@/views/viajes/viajesIndex.vue'),
         },
         {
           path: '/bus',
           name: 'bus',
+          meta: { requiresAuth: true },
           component: () => import('@/views/bus/busIndex.vue'),
         },
       ],

@@ -308,9 +308,20 @@
           .then((response) => {
             console.log(response)
             localStorage.setItem('viajeIda', JSON.stringify(response.data))
+            this.$swal({
+              icon: 'success',
+              title: 'Viaje Encontrado',
+            }).then(() => {
+              this.$router.push('/bus')
+            })
           })
           .catch((error) => {
-            console.log(error.response.data.error)
+            this.$swal({
+              icon: 'error',
+              // eslint-disable-next-line quotes
+              title: `Error`,
+              text: error.response.data.error,
+            })
           })
       },
       check () {

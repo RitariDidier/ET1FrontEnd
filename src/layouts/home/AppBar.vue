@@ -56,7 +56,7 @@
             min-width="96"
             text
           >
-            Mod
+            MOD
           </base-btn>
           <v-tab
             :ripple="false"
@@ -107,7 +107,7 @@
             min-width="96"
             text
           >
-            Huesped
+            {{ nombre }}
           </base-btn>
           <v-tab
             :ripple="false"
@@ -146,7 +146,7 @@
             min-width="96"
             text
           >
-            {{ nombre }}
+            ADMIN
           </base-btn>
           <v-tab
             :ripple="false"
