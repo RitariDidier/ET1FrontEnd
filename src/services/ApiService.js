@@ -5,7 +5,7 @@ class ApiService {
   constructor (route) {
     this.resource = axios.create({
       // eslint-disable-next-line comma-dangle
-      baseURL: 'http://localhost:8080/api/'
+      baseURL: 'http://localhost:3000/api/'
     })
     this.resource.interceptors.request.use(request)
     this.resource.interceptors.response.use(res => res, responseError)

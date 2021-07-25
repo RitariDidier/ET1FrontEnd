@@ -16,10 +16,6 @@
     mixins: [
       LoadSections([
         'seleccion-viajes',
-        'pro-features',
-        'affiliates',
-        'features',
-        'theme-features',
       ]),
     ],
 

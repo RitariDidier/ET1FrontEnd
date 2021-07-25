@@ -18,7 +18,7 @@
       <v-spacer />
 
       <div
-        v-if="isAnfitrion"
+        v-if="isMod"
       >
         <v-tabs
           class="hidden-sm-and-down"
@@ -26,7 +26,7 @@
           background-color="transparent"
         >
           <v-tab
-            v-if="isAnfitrion"
+            v-if="isMod"
             to="/"
             :active="isActive('/')"
             :ripple="false"
@@ -37,7 +37,7 @@
             Home
           </v-tab>
           <v-tab
-            v-if="isAnfitrion"
+            v-if="isMod"
             to="/perfil"
             :active="isActive('/perfil')"
             :ripple="false"
@@ -48,7 +48,7 @@
             Perfil
           </v-tab>
           <base-btn
-            v-if="isAnfitrion"
+            v-if="isMod"
             id="rol"
             color="purple"
             :ripple="false"
@@ -56,7 +56,7 @@
             min-width="96"
             text
           >
-            Anfitrion
+            Mod
           </base-btn>
           <v-tab
             :ripple="false"
@@ -69,7 +69,7 @@
         </v-tabs>
       </div>
       <div
-        v-if="isHuesped"
+        v-if="isUser"
       >
         <v-tabs
           class="hidden-sm-and-down"
@@ -77,7 +77,7 @@
           background-color="transparent"
         >
           <v-tab
-            v-if="isHuesped"
+            v-if="isUser"
             to="/"
             :active="isActive('/')"
             :ripple="false"
@@ -88,7 +88,7 @@
             Home
           </v-tab>
           <v-tab
-            v-if="isHuesped"
+            v-if="isUser"
             to="/perfil"
             :active="isActive('/perfil')"
             :ripple="false"
@@ -99,7 +99,7 @@
             Perfil
           </v-tab>
           <base-btn
-            v-if="isHuesped"
+            v-if="isUser"
             id="rol"
             color="orange"
             :ripple="false"
@@ -146,7 +146,7 @@
             min-width="96"
             text
           >
-            Admin
+            {{ nombre }}
           </base-btn>
           <v-tab
             :ripple="false"
@@ -203,7 +203,7 @@
     }),
     computed: {
       ...mapState(['user']),
-      ...mapGetters(['isAuthenticated', 'isAnfitrion', 'isHuesped', 'isAdmin']),
+      ...mapGetters(['isAuthenticated', 'isMod', 'isUser', 'isAdmin', 'nombre']),
     },
     methods: {
       // eslint-disable-next-line no-undef

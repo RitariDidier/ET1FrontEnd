@@ -5,9 +5,11 @@
         margin-top: 5vh;
         margin-left: 5vh;
         margin-bottom: 5vh;
-        
+        width: 100%;
         .contenedor-responsive{
             gap: 3%;
+            width: 120%;
+            height: 100%;
             .card1{
                 height: 600px;
                 width: 550px;
@@ -18,12 +20,13 @@
                     font-size: 1rem;
                 }
                 .asientos{
-                    margin-left: 35%;
-                    margin-top: -10%;
+                    border-left: solid 1px green;
+                    margin-left: 50%;
+                    margin-top: -20%;
                     display: grid;
                     grid-template-columns: 1fr 1fr 1fr;
                     gap: 1.9rem 0rem;
-                    width: 80%;
+                    width: 60%;
                     height: 100%;
                     li{
                         list-style: none;

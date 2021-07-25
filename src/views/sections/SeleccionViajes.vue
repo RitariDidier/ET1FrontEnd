@@ -99,55 +99,15 @@
               </template>
               <!-- Date Picker -->
               <!-- Hour Picker -->
-              <template>
-                <v-row>
-                  <v-col
-                    cols="12"
-                    class="pa-0"
-                  >
-                    <v-dialog
-                      ref="dialog3"
-                      v-model="modal3"
-                      :return-value.sync="time"
-                      persistent
-                      width="290px"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-text-field
-                          v-model="time"
-                          label="Hora de Ida"
-                          prepend-icon="mdi-clock-time-four-outline"
-                          readonly
-                          v-bind="attrs"
-                          v-on="on"
-                        />
-                      </template>
-                      <v-time-picker
-                        v-if="modal3"
-                        v-model="time"
-                        full-width
-                      >
-                        <v-btn
-                          text
-                          color="primary"
-                          @click="modal3 = false"
-                        >
-                          Cancel
-                        </v-btn>
-                        <v-btn
-                          text
-                          color="primary"
-                          @click="$refs.dialog3.save(time)"
-                        >
-                          OK
-                        </v-btn>
-                      </v-time-picker>
-                    </v-dialog>
-                  </v-col>
-                </v-row>
-              </template>
+              <v-select
+                v-model="horaIda"
+                :items="horas"
+                :rules="[v => !!v || 'Item is required']"
+                label="Hora Ida"
+                required
+                class="pa-0"
+              />
               <!-- Hour Picker -->
-              <!-- :rules="[v => !!v || 'You must agree to continue!']" -->
               <!-- checkbox -->
               <v-checkbox
                 v-model="checkbox"
@@ -207,55 +167,15 @@
               </template>
               <!-- Date Picker -->
               <!-- Hour Picker -->
-              <template
+              <v-select
                 v-if="checkbox"
-              >
-                <v-row>
-                  <v-col
-                    cols="12"
-                    class="pa-0"
-                  >
-                    <v-dialog
-                      ref="dialog4"
-                      v-model="modal4"
-                      :return-value.sync="time2"
-                      persistent
-                      width="290px"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-text-field
-                          v-model="time2"
-                          label="Hora de Vuelta"
-                          prepend-icon="mdi-clock-time-four-outline"
-                          readonly
-                          v-bind="attrs"
-                          v-on="on"
-                        />
-                      </template>
-                      <v-time-picker
-                        v-if="modal4"
-                        v-model="time2"
-                        full-width
-                      >
-                        <v-btn
-                          text
-                          color="primary"
-                          @click="modal4 = false"
-                        >
-                          Cancel
-                        </v-btn>
-                        <v-btn
-                          text
-                          color="primary"
-                          @click="$refs.dialog4.save(time2)"
-                        >
-                          OK
-                        </v-btn>
-                      </v-time-picker>
-                    </v-dialog>
-                  </v-col>
-                </v-row>
-              </template>
+                v-model="horaVuelta"
+                :items="horas"
+                :rules="[v => !!v || 'Item is required']"
+                label="Hora Vuelta"
+                required
+                class="pa-0"
+              />
               <!-- Hour Picker -->
               <v-btn
                 :disabled="!valid"
@@ -263,7 +183,14 @@
                 class="mr-4"
                 @click="enviar"
               >
-                Aceptar
+                Comprar
+              </v-btn>
+              <v-btn
+                color="success"
+                class="mr-4"
+                @click="crearViaje"
+              >
+                crearViaje
               </v-btn>
             </v-form>
           </v-card>
@@ -274,20 +201,11 @@
 </template>
 
 <script>
+  import viajeService from '@/services/viaje.service'
   export default {
     name: 'SeleccionViajes',
     data: () => ({
       valid: true,
-      name: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-      ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
       select: 'Iquique',
       select2: null,
       Origenes: [
@@ -305,10 +223,18 @@
         'Puerto Montt',
       ],
       Destinos: [
+        'Iquique',
         'Antofagasta',
-        'Coquimbo',
-        'Temuco',
+        'Copiapo',
+        'La Serena',
+        'Valparaiso',
         'Santiago',
+        'Rancagua',
+        'Talca',
+        'Concepcion',
+        'Temuco',
+        'Valdivia',
+        'Puerto Montt',
       ],
       checkbox: false,
       // Fecha Ida
@@ -318,11 +244,9 @@
       fechaVuelta: null,
       modal2: false,
       // Hora Ida
-      time: null,
-      modal3: false,
+      horaIda: null,
       // Hora Vuelta
-      time2: null,
-      modal4: false,
+      horaVuelta: null,
       viaje: {
         origen: '',
         destino: '',
@@ -331,6 +255,7 @@
         horaIda: '',
         horaVuelta: '',
       },
+      horas: ['08:30', '13:30', '16:45', '18:15', '21:15'],
     }),
     methods: {
       validate () {
@@ -339,29 +264,77 @@
       enviar () {
         this.viaje.fechaIda = this.fechaIda
         this.viaje.fechaVuelta = this.fechaVuelta
-        this.viaje.horaIda = this.time
-        this.viaje.horaVuelta = this.time2
+        this.viaje.horaIda = this.horaIda
+        this.viaje.horaVuelta = this.horaVuelta
         this.viaje.origen = this.select
         this.viaje.destino = this.select2
         console.log(this.viaje)
-        if (this.viaje.fechaVuelta != null) {
-          //    2 pasajes
-          //    con ida = ida
-          //    vuelta = vuelta
-          //    despues
-          //    ida = vuelta
-          //    vuelta = ida
+        this.buscarViaje()
+      },
+      buscarViaje () {
+        if (!this.viaje.fechaVuelta) {
+          this.busIda()
         } else {
-          // 1 pasaje
+          this.busIda()
+          this.busVuelta()
         }
+      },
+      busVuelta () {
+        viajeService
+          .findViajeVuelta(this.viaje)
+          .then((response) => {
+            console.log(response)
+            localStorage.setItem('viajeVuelta', JSON.stringify(response.data))
+            this.$swal({
+              icon: 'success',
+              title: 'Usuario creado con exito',
+            }).then(() => {
+              this.$router.push('/bus')
+            })
+          })
+          .catch((error) => {
+            console.log(error.response.data.error)
+            this.$swal({
+              icon: 'error',
+              // eslint-disable-next-line quotes
+              title: `Error`,
+              text: error.response.data.error,
+            })
+          })
+      },
+      busIda () {
+        viajeService
+          .findViaje(this.viaje)
+          .then((response) => {
+            console.log(response)
+            localStorage.setItem('viajeIda', JSON.stringify(response.data))
+          })
+          .catch((error) => {
+            console.log(error.response.data.error)
+          })
       },
       check () {
         if (this.checkbox) {
           this.fechaVuelta = (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)
         } else {
           this.fechaVuelta = null
-          this.time2 = null
+          this.horaVuelta = null
         }
+      },
+      crearViaje () {
+        console.log('Viaje Creado')
+        viajeService
+          .viajes({
+            origen: 'Antofagasta',
+            destino: 'Temuco',
+            fecha: '2021-07-24',
+          })
+          .then((response) => {
+            console.log(response)
+          })
+          .catch((error) => {
+            console.log(error.response.data.error)
+          })
       },
     },
   }

@@ -17,7 +17,13 @@
             class="logo"
           >
             <base-img
-              :src="require(`@/assets/Perfect-Logo2.svg`)"
+              :src="require(`@/assets/BusesMidy.png`)"
+              fill
+              max-width="150"
+              width="100%"
+            />
+            <base-img
+              :src="require(`@/assets/icon1.png`)"
               fill
               max-width="150"
               width="100%"
@@ -36,11 +42,11 @@
               @submit.prevent="handleSubmit(login)"
             >
               <base-input
-                v-model="credenciales.username"
+                v-model="credenciales.email"
                 class="form--inputNombre"
-                name="nombre"
+                name="email"
                 type="text"
-                placeholder="Nombre"
+                placeholder="Email"
               />
               <base-input
                 v-model="credenciales.password"
@@ -92,7 +98,7 @@
       return {
         loginForm: true,
         credenciales: {
-          username: '',
+          email: '',
           password: '',
         },
       }
@@ -104,22 +110,13 @@
           .login(this.credenciales)
           .then((response) => {
             console.log(response)
-            const { username, accessToken, roles, id } = response.data
-            var localuser = {
-              nombre: username,
-              rol: roles[0],
-              id: id,
-            }
-            this.setUser(localuser)
-            localStorage.setItem('token', accessToken)
-            localStorage.setItem('user', JSON.stringify(localuser))
-            authService.getUserByID(localuser.id)
-              .then((resp) => {
-                localStorage.setItem('user2', JSON.stringify(resp.data))
-              })
+            const { user, token } = response.data
+            this.setUser(user)
+            localStorage.setItem('token', token)
+            localStorage.setItem('user', JSON.stringify(user))
             this.$router.push('/')
             this.$swal({
-              title: `Bienvenido ${username}`,
+              title: `Bienvenido ${user.firstName}`,
               icon: 'success',
               showConfirmButton: false,
               position: 'center',

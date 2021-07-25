@@ -27,7 +27,13 @@
             width="100%"
           >
             <base-img
-              :src="require(`@/assets/Perfect-Logo2.svg`)"
+              :src="require(`@/assets/BusesMidy.png`)"
+              fill
+              max-width="150"
+              width="100%"
+            />
+            <base-img
+              :src="require(`@/assets/icon1.png`)"
               fill
               max-width="150"
               width="100%"

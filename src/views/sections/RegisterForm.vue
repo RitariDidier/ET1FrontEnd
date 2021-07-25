@@ -25,15 +25,27 @@
             @submit.prevent="saveUser()"
           >
             <b-form-input
-              v-model="user.usuNombre"
+              v-model="user.firstName"
               class="mb-3"
-              name="nombre"
+              name="firstName"
               placeholder="Nombre"
             />
             <b-form-input
-              v-model="user.usuClave"
+              v-model="user.lastName"
               class="mb-3"
-              name="Password"
+              name="lastName"
+              placeholder="Apellido"
+            />
+            <b-form-input
+              v-model="user.email"
+              class="mb-3"
+              name="email"
+              placeholder="Email"
+            />
+            <b-form-input
+              v-model="user.password"
+              class="mb-3"
+              name="password"
               :rules="{ required: true, min: 6 }"
               type="password"
               placeholder="Contraseña"
@@ -62,9 +74,15 @@
             width="100%"
           >
             <base-img
-              :src="require(`@/assets/Perfect-Logo2.svg`)"
+              :src="require(`@/assets/BusesMidy.png`)"
               contain
               max-width="200"
+              width="100%"
+            />
+            <base-img
+              :src="require(`@/assets/icon1.png`)"
+              fill
+              max-width="150"
               width="100%"
             />
             <base-body>
@@ -84,8 +102,10 @@
     data () {
       return {
         user: {
-          usuNombre: '',
-          usuClave: '',
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
         },
       }
     },
@@ -107,7 +127,7 @@
               icon: 'error',
               // eslint-disable-next-line quotes
               title: `Error`,
-              text: 'Usuario ya registrado',
+              text: error.response.data.error,
             })
           })
       },

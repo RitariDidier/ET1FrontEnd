@@ -8,7 +8,7 @@ class AuthService extends Api {
 
   register (credentials) {
     // eslint-disable-next-line quotes
-    return this.resource.post(`auth/register/huesped`, credentials)
+    return this.resource.post(`auth/register/`, credentials)
   }
 
   delete (credentials) {

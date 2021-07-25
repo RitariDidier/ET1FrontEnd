@@ -10,19 +10,19 @@ const store = new Vuex.Store({
     },
     getters: {
       nombre (state) {
-        return state.user.nombre
+        return state.user.firstName + ' ' + state.user.lastName
       },
       isAuthenticated (state) {
         return state.user !== null
       },
       isMod (state) {
-        return state.user.rol === 'Mod'
+        return state.user.role === 'Mod'
       },
       isUser (state) {
-        return state.user.rol === 'User'
+        return state.user.role === 'User'
       },
       isAdmin (state) {
-        return state.user.rol === 'Admin'
+        return state.user.role === 'Admin'
       },
     },
     mutations: {
