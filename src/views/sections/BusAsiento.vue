@@ -74,6 +74,7 @@
           </ul>
         </v-card>
         <v-card
+          v-if="isViajeVuelta"
           class="card2"
         >
           <base-btn
@@ -93,6 +94,7 @@
 
 <script>
   import busService from '@/services/bus.service'
+  import { mapState, mapGetters, mapMutations } from 'vuex'
   export default {
     name: 'BusAsiento',
     data: () => ({
@@ -100,12 +102,14 @@
       asientoSelected: null,
       asientoAnterior: null,
     }),
+    computed: {
+      ...mapGetters(['isViajeIda', 'isViajeVuelta']),
+    },
     mounted () {
-      this.llenar()
+      console.log(this.isViajeIda)
+      console.log(this.isViajeVuelta)
     },
     methods: {
-      llenar () {
-      },
       seleccionar (asiento) {
         console.log(asiento)
         asiento.ocupado = true

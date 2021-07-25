@@ -201,6 +201,7 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex'
   import viajeService from '@/services/viaje.service'
   export default {
     name: 'SeleccionViajes',
@@ -258,6 +259,7 @@
       horas: ['08:30', '13:30', '16:45', '18:15', '21:15'],
     }),
     methods: {
+      ...mapMutations(['setViajeIda', 'setViajeVuelta']),
       validate () {
         this.$refs.form.validate()
       },
@@ -284,6 +286,7 @@
           .findViajeVuelta(this.viaje)
           .then((response) => {
             console.log(response)
+            this.setViajeVuelta(response.data)
             localStorage.setItem('viajeVuelta', JSON.stringify(response.data))
             this.$swal({
               icon: 'success',
@@ -307,6 +310,7 @@
           .findViaje(this.viaje)
           .then((response) => {
             console.log(response)
+            this.setViajeIda(response.data)
             localStorage.setItem('viajeIda', JSON.stringify(response.data))
             this.$swal({
               icon: 'success',
@@ -336,8 +340,8 @@
         console.log('Viaje Creado')
         viajeService
           .viajes({
-            origen: 'Antofagasta',
-            destino: 'Temuco',
+            origen: 'Temuco',
+            destino: 'Antofagasta',
             fecha: '2021-07-24',
           })
           .then((response) => {

@@ -7,6 +7,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         user: credentialService.getUser(),
+        viajeIda: credentialService.getViajeIda(),
+        viajeVuelta: credentialService.getViajeVuelta(),
     },
     getters: {
       nombre (state) {
@@ -24,10 +26,22 @@ const store = new Vuex.Store({
       isAdmin (state) {
         return state.user.role === 'Admin'
       },
+      isViajeIda (state) {
+        return state.viajeIda !== null
+      },
+      isViajeVuelta (state) {
+        return state.viajeVuelta !== null
+      },
     },
     mutations: {
       setUser (state, user) {
         state.user = user
+      },
+      setViajeIda (state, viajeIda) {
+        state.viajeIda = viajeIda
+      },
+      setViajeVuelta (state, viajeVuelta) {
+        state.viajeVuelta = viajeVuelta
       },
     },
     actions: {},
