@@ -100,14 +100,14 @@
           </v-tab>
           <v-tab
             v-if="isUser"
-            to="/perfil"
-            :active="isActive('/perfil')"
+            to="/pasajes"
+            :active="isActive('/pasajes')"
             :ripple="false"
             class="font-weight-bold"
             min-width="96"
             text
           >
-            Perfil
+            Tus Pasajes
           </v-tab>
           <base-btn
             v-if="isUser"

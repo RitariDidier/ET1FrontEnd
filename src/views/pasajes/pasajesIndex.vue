@@ -15,7 +15,7 @@
 
     mixins: [
       LoadSections([
-        'section-pasajes',
+        'pasajes-cards',
       ]),
     ],
 

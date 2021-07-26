@@ -54,6 +54,12 @@ const routes = [
           meta: { requiresAuth: true },
           component: () => import('@/views/bus/busIndex.vue'),
         },
+        {
+          path: '/pasajes',
+          name: 'pasajes',
+          meta: { requiresAuth: true },
+          component: () => import('@/views/pasajes/pasajesIndex.vue'),
+        },
       ],
     },
 
