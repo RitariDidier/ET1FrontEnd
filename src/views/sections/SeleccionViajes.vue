@@ -336,9 +336,9 @@
         console.log('Viaje Creado')
         viajeService
           .viajes({
-            origen: 'Temuco',
-            destino: 'Antofagasta',
-            fecha: '2021-07-24',
+            origen: 'Antofagasta',
+            destino: 'Temuco',
+            fecha: '2021-07-30',
           })
           .then((response) => {
             console.log(response)

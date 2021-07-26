@@ -393,6 +393,7 @@
 
 <script>
   import busService from '@/services/bus.service'
+  import pasajeService from '@/services/pasajes.service'
   import { mapGetters } from 'vuex'
   export default {
     name: 'BusAsiento',
@@ -406,7 +407,7 @@
       enviado: [false, false],
     }),
     computed: {
-      ...mapGetters(['isViajeIda', 'isViajeVuelta']),
+      ...mapGetters(['isViajeIda', 'isViajeVuelta', 'getUserID']),
     },
     mounted () {
       console.log(this.enviado[0])
@@ -447,12 +448,30 @@
             }).then(() => {
               if (this.isViajeVuelta) {
                 if (this.enviado[0] && this.enviado[1]) {
+                  pasajeService
+                    .createPasaje(this.viaje.origen, this.viaje.destino, this.viaje.fecha, this.viaje.horaSalida, this.asientoSelected.numero, this.getUserID)
+                    .then((response) => {
+                      console.log(response)
+                    },
+                    )
+                  pasajeService
+                    .createPasaje(this.viajeVuelta.origen, this.viajeVuelta.destino, this.viajeVuelta.fecha, this.viajeVuelta.horaSalida, this.asientoSelectedVuelta.numero, this.getUserID)
+                    .then((response) => {
+                      console.log(response)
+                    },
+                    )
                   localStorage.removeItem('viajeVuelta')
                   localStorage.removeItem('viajeIda')
                   this.$router.push('/')
                 }
               } else {
                 if (this.enviado[0]) {
+                  pasajeService
+                    .createPasaje(this.viaje.origen, this.viaje.destino, this.viaje.fecha, this.viaje.horaSalida, this.asientoSelected.numero, this.getUserID)
+                    .then((response) => {
+                      console.log(response)
+                    },
+                    )
                   localStorage.removeItem('viajeVuelta')
                   localStorage.removeItem('viajeIda')
                   this.$router.push('/')
@@ -482,6 +501,18 @@
               title: 'Asiento Asignado',
             }).then(() => {
               if (this.enviado[0] && this.enviado[1]) {
+                pasajeService
+                  .createPasaje(this.viaje.origen, this.viaje.destino, this.viaje.fecha, this.viaje.horaSalida, this.asientoSelected.numero, this.getUserID)
+                  .then((response) => {
+                    console.log(response)
+                  },
+                  )
+                pasajeService
+                  .createPasaje(this.viajeVuelta.origen, this.viajeVuelta.destino, this.viajeVuelta.fecha, this.viajeVuelta.horaSalida, this.asientoSelectedVuelta.numero, this.getUserID)
+                  .then((response) => {
+                    console.log(response)
+                  },
+                  )
                 localStorage.removeItem('viajeVuelta')
                 localStorage.removeItem('viajeIda')
                 this.$router.push('/')

@@ -14,6 +14,9 @@ const store = new Vuex.Store({
       nombre (state) {
         return state.user.firstName + ' ' + state.user.lastName
       },
+      getUserID (state) {
+        return state.user._id
+      },
       isAuthenticated (state) {
         return state.user !== null
       },
