@@ -9,7 +9,7 @@
       height="80"
     >
       <base-img
-        :src="require(`@/assets/PerfectHost-logo-${$vuetify.theme.isDark ? 'dark' : 'light'}.svg`)"
+        :src="require(`@/assets/icon1.png`)"
         contain
         max-width="100"
         width="100%"
@@ -86,6 +86,17 @@
             text
           >
             Home
+          </v-tab>
+          <v-tab
+            v-if="isUser"
+            to="/viajes"
+            :active="isActive('/viajes')"
+            :ripple="false"
+            class="font-weight-bold"
+            min-width="96"
+            text
+          >
+            Viajes
           </v-tab>
           <v-tab
             v-if="isUser"

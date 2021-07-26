@@ -2,21 +2,21 @@
     .contenedor-cards{
         display: flex;
         flex-direction: row;
-        margin-top: 10vh;
+        margin-top: 5vh;
         margin-left: 10vh;
         margin-bottom: 5vh;
         
         .contenedor-responsive{
             // gap: 55%;
-            gap: 20%;
-            .card1{
-                background-color: transparent;
-            }
+            // gap: 20%;
             .card2{
                 height: 600px;
                 width: 400px;
-                padding: 2% 5%;
+                padding: 1% 5%;
                 border: 1px solid blue;
+                .button{
+                    margin-left: -10%;
+                }
             }
         }
     }

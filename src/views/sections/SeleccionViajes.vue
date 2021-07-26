@@ -15,11 +15,6 @@
           class="contenedor-responsive"
         >
           <v-card
-            class="card1"
-          >
-            Texto
-          </v-card>
-          <v-card
             class="card2"
           >
             <v-form
@@ -31,6 +26,7 @@
                 :ripple="false"
                 height="50"
                 text
+                class="button"
               >
                 Escoge tu Viaje
               </base-btn>
@@ -290,7 +286,7 @@
             localStorage.setItem('viajeVuelta', JSON.stringify(response.data))
             this.$swal({
               icon: 'success',
-              title: 'Usuario creado con exito',
+              title: 'Bus Encontrado',
             }).then(() => {
               this.$router.push('/bus')
             })
