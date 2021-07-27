@@ -339,21 +339,6 @@
           this.horaVuelta = null
         }
       },
-      crearViaje () {
-        console.log('Viaje Creado')
-        viajeService
-          .viajes({
-            origen: 'Antofagasta',
-            destino: 'Temuco',
-            fecha: '2021-07-30',
-          })
-          .then((response) => {
-            console.log(response)
-          })
-          .catch((error) => {
-            console.log(error.response.data.error)
-          })
-      },
     },
   }
 </script>

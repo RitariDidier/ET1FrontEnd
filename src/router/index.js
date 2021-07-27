@@ -66,6 +66,12 @@ const routes = [
           meta: { requiresAuth: true },
           component: () => import('@/views/users/usersIndex.vue'),
         },
+        {
+          path: '/mod',
+          name: 'mod',
+          meta: { requiresAuth: true },
+          component: () => import('@/views/mod/modIndex.vue'),
+        },
       ],
     },
 
