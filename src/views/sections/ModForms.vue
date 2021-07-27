@@ -313,9 +313,8 @@
   </v-responsive>
 </template>
 <script>
-  import { mapMutations } from 'vuex'
-  import authService from '@/services/auth.service'
   import modService from '@/services/mod.service'
+  import viajeService from '@/services/viaje.service'
   export default {
     name: 'ModForms',
     data () {
@@ -370,36 +369,6 @@
       }
     },
     methods: {
-      ...mapMutations(['setUser']),
-      login () {
-        authService
-          .login(this.credenciales)
-          .then((response) => {
-            console.log(response)
-            const { user, token } = response.data
-            this.setUser(user)
-            localStorage.setItem('token', token)
-            localStorage.setItem('user', JSON.stringify(user))
-            this.$router.push('/')
-            this.$swal({
-              title: `Bienvenido ${user.firstName}`,
-              icon: 'success',
-              showConfirmButton: false,
-              position: 'center',
-              timer: 2000,
-              toast: true,
-            })
-          })
-          .catch((error) => {
-            console.log(error.response.data.error)
-            this.$swal({
-              icon: 'error',
-              // eslint-disable-next-line quotes
-              title: `Error`,
-              text: 'Usuario o Contraseña no encontrados',
-            })
-          })
-      },
       crearViaje () {
         console.log('Viaje Creado')
         modService
@@ -411,23 +380,47 @@
           .then((response) => {
             console.log(response)
             this.$swal({
-              // eslint-disable-next-line quotes
-              title: `Creado con exito`,
               icon: 'success',
-              showConfirmButton: false,
-              position: 'center',
-              timer: 2000,
-              toast: true,
+              title: 'Viaje Creado',
+            }).then(() => {
+              // Hacer algo
+            })
+          })
+          .catch((error) => {
+            this.$swal({
+              icon: 'error',
+              // eslint-disable-next-line quotes
+              title: `Error`,
+              text: error.response.data.error,
+            })
+          })
+      },
+      BuscarBus () {
+        viajeService
+          .findViaje({
+            origen: this.origenBuscar,
+            destino: this.destinoBuscar,
+            fechaIda: this.fechaIdaBuscar,
+            horaIda: this.fechaIdaBuscar,
+          })
+          .then((response) => {
+            console.log(response)
+            this.$swal({
+              icon: 'success',
+              title: 'Bus Encontrado',
+            }).then(() => {
+              // Hacer algo
             })
           })
           .catch((error) => {
             console.log(error.response.data.error)
+            this.$swal({
+              icon: 'error',
+              // eslint-disable-next-line quotes
+              title: `Error`,
+              text: error.response.data.error,
+            })
           })
-      },
-      mostrarCrear () {
-        console.log(this.origenCrear)
-        console.log(this.destinoCrear)
-        console.log(this.fechaIdaCrear)
       },
       mostrarBuscar () {
         console.log(this.origenBuscar)
@@ -444,8 +437,7 @@
       validateCrear () {
         this.$refs.form1.validate()
         if (this.$refs.form1.validate()) {
-          console.log('enviando datos')
-          this.mostrarCrear()
+          this.crearViaje()
         }
       },
       validateBuscar () {
@@ -453,6 +445,7 @@
         if (this.$refs.form2.validate()) {
           console.log('enviando datos')
           this.mostrarBuscar()
+          this.BuscarBus()
         }
       },
       validateEliminar () {
