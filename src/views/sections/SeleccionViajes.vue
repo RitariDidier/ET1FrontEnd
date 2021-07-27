@@ -73,6 +73,7 @@
                       <v-date-picker
                         v-model="fechaIda"
                         scrollable
+                        :min="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
                       >
                         <v-btn
                           text
@@ -141,6 +142,8 @@
                       <v-date-picker
                         v-model="fechaVuelta"
                         scrollable
+                        :min="fechaIda"
+                        :show-current="fechaIda"
                       >
                         <v-btn
                           text
@@ -199,6 +202,7 @@
 <script>
   import { mapMutations } from 'vuex'
   import viajeService from '@/services/viaje.service'
+  import moment from 'moment'
   export default {
     name: 'SeleccionViajes',
     data: () => ({
@@ -256,6 +260,9 @@
     }),
     methods: {
       ...mapMutations(['setViajeIda', 'setViajeVuelta']),
+      customFormatter (date) {
+        return moment(date).format('D MMMM YYYY')
+      },
       validate () {
         this.$refs.form.validate()
       },

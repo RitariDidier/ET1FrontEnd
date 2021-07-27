@@ -6,6 +6,9 @@
     <v-row
       class="v-row"
     >
+      <h1>
+        {{ pasajes.length==0 ? "No se encontraron pasajes" : "" }}
+      </h1>
       <v-card
         v-for="(pasaje, index) in pasajes"
         :key="pasaje.id"

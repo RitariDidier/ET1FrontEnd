@@ -25,6 +25,10 @@ class AuthService extends Api {
   getUserByID (id) {
     return this.resource.get('auth/buscar/' + id)
   }
+
+  getUsers () {
+    return this.resource.get('users/')
+  }
 }
 
 export default new AuthService('auth')
