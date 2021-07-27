@@ -38,14 +38,14 @@
           </v-tab>
           <v-tab
             v-if="isMod"
-            to="/perfil"
-            :active="isActive('/perfil')"
+            to="/mod"
+            :active="isActive('/mod')"
             :ripple="false"
             class="font-weight-bold"
             min-width="96"
             text
           >
-            Perfil
+            Gestionar Pasajes
           </v-tab>
           <base-btn
             v-if="isMod"

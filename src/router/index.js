@@ -60,6 +60,12 @@ const routes = [
           meta: { requiresAuth: true },
           component: () => import('@/views/pasajes/pasajesIndex.vue'),
         },
+        {
+          path: '/mod',
+          name: 'mod',
+          meta: { requiresAuth: true },
+          component: () => import('@/views/mod/modIndex.vue'),
+        },
       ],
     },
 
