@@ -184,13 +184,6 @@
               >
                 Comprar
               </v-btn>
-              <v-btn
-                color="success"
-                class="mr-4"
-                @click="crearViaje"
-              >
-                crearViaje
-              </v-btn>
             </v-form>
           </v-card>
         </v-row>

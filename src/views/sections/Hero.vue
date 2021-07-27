@@ -32,8 +32,13 @@
             :class="$vuetify.breakpoint.smAndDown ? 'flex-column align-start' : 'align-center'"
             class="d-flex flex-wrap"
           >
-            <base-btn>
-              Compra un Pasaje
+            <base-btn
+              :ripple="false"
+              class="pa-1"
+              height="auto"
+              :to="isAuthenticated ? '/viajes' : '/login'"
+            >
+              {{ isAuthenticated ? 'Comprar pasaje' : 'Ingresar' }}
             </base-btn>
 
             <span class="font-weight-bold ml-6 mr-4 my-4">o</span>
@@ -42,9 +47,9 @@
               :ripple="false"
               class="pa-1"
               height="auto"
-              text
+              :to="isAuthenticated ? '/pasajes' : '/register'"
             >
-              Gestiona Perfil
+              {{ isAuthenticated ? 'Pasajes' : 'Registrarse' }}
             </base-btn>
           </div>
         </v-responsive>
@@ -54,6 +59,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     name: 'SectionHero',
 
@@ -67,6 +73,7 @@
 
         return `calc(${height} - ${this.$vuetify.application.top}px)`
       },
+      ...mapGetters(['isAuthenticated']),
     },
   }
 </script>
