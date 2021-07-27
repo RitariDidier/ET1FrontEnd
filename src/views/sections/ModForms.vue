@@ -401,7 +401,7 @@
             origen: this.origenBuscar,
             destino: this.destinoBuscar,
             fechaIda: this.fechaIdaBuscar,
-            horaIda: this.fechaIdaBuscar,
+            horaIda: this.horaIdaBuscar,
           })
           .then((response) => {
             console.log(response)
