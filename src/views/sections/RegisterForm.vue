@@ -1,26 +1,19 @@
 <template>
   <v-responsive
-    class="align-center mx-auto"
-    max-width="750"
-    height="100%"
-    width="100%"
+    class="registerForm"
   >
     <v-card
-      class="py-10"
-      outlined
-      rounded
-      height="86vh"
+      class="card1"
     >
       <v-container
         fluid
-        class="fill-height"
+        class="register-container"
       >
         <v-row
-          class="py-0"
-          align="center"
+          class="v-row"
         >
           <b-form
-            class="px-15"
+            class="form"
             role="registerForm"
             @submit.prevent="saveUser()"
           >
@@ -68,15 +61,12 @@
             </base-btn>
           </b-form>
           <div
-            class="mx-auto py-15 my-10"
-            max-width="250"
-            height="100%"
-            width="100%"
+            class="logo"
           >
             <base-img
               :src="require(`@/assets/BusesMidy.png`)"
-              contain
-              max-width="200"
+              fill
+              max-width="150"
               width="100%"
             />
             <base-img
