@@ -462,7 +462,7 @@
                     )
                   localStorage.removeItem('viajeVuelta')
                   localStorage.removeItem('viajeIda')
-                  this.$router.push('/')
+                  this.$router.push('/pasajes')
                 }
               } else {
                 if (this.enviado[0]) {
@@ -474,7 +474,7 @@
                     )
                   localStorage.removeItem('viajeVuelta')
                   localStorage.removeItem('viajeIda')
-                  this.$router.push('/')
+                  this.$router.push('/pasajes')
                 }
               }
             })
@@ -515,7 +515,7 @@
                   )
                 localStorage.removeItem('viajeVuelta')
                 localStorage.removeItem('viajeIda')
-                this.$router.push('/')
+                this.$router.push('/pasajes')
               }
             })
           })

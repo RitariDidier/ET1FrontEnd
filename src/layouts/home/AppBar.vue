@@ -45,7 +45,7 @@
             min-width="96"
             text
           >
-            Gestionar Pasajes
+            Gestionar Viajes
           </v-tab>
           <base-btn
             v-if="isMod"
@@ -147,6 +147,16 @@
             min-width="96"
           >
             Admin
+          </v-tab>
+          <v-tab
+            v-if="isAdmin"
+            to="/users"
+            :active="isActive('/users')"
+            :ripple="false"
+            class="font-weight-bold"
+            min-width="96"
+          >
+            Users
           </v-tab>
           <base-btn
             v-if="isAdmin"
