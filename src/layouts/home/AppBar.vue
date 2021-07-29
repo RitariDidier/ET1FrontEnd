@@ -140,16 +140,6 @@
         >
           <v-tab
             v-if="isAdmin"
-            to="/"
-            :active="isActive('/')"
-            :ripple="false"
-            class="font-weight-bold"
-            min-width="96"
-          >
-            Admin
-          </v-tab>
-          <v-tab
-            v-if="isAdmin"
             to="/mod"
             :active="isActive('/mod')"
             :ripple="false"
