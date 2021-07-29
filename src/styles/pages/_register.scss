@@ -1,8 +1,8 @@
 #register{
     background-color: green;
-    // height: 100%;
+    height: 100%;
     .registerForm{
-        height: 100%;
+        height: 80vh;
         width: 100vh;
         max-width:750;
         width:100%;
@@ -23,8 +23,7 @@
                 justify-content: center;
                 height: 100%;
                 // width: 100vh;
-                margin-top: 5%;
-                margin-left: 10%;
+                // margin-left: 10%;
                 gap: 10rem;
                 .form{
                     margin-top: 5%;
